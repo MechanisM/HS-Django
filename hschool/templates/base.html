@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet" />
+		<link href="{{ MEDIA_URL }}css/local.css" rel="stylesheet" />
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+
+			<div class="outliner">
+	      <div class="sidebar left span4">
+					<div id="logo">
+						<a href="#"><img src="{{ MEDIA_URL }}images/logo.png" /></a>
+					</div>
+					<div class="block">
+						<h4>{{ _("Popular Tags") }}</h4>
+						<ul>
+							<li>Lorem ipsum dolor</li>
+							<li>Lorem ipsum dolor</li>
+							<li>Lorem ipsum dolor</li>
+							<li>Lorem ipsum dolor</li>
+							<li>Lorem ipsum dolor</li>
+						</ul>
+					</div>
+	      </div> <!-- /sidebar -->
+
+			
+	      <div class="content row">
+
+					<div class="topbar row">
+			      <div class="topbar-inner">
+			        <ul class="nav">
+		            <li class="active"><a href="#">{{ _("Home") }}</a></li>
+		            <li><a href="#">{{ _("Series") }}</a></li>
+		            <li><a href="#">{{ _("Original Series") }}</a></li>
+								<li><a href="#">{{ _("Tags") }}</a></li>
+								<li><a href="#">{{ _("More") }}</a></li>
+		          </ul>
+			      </div>
+			    </div> <!-- /topbar -->
+
+					<div class="sidebar right span4">
+						<div class="block">
+							<h4>{{ _("Our Friends") }}</h4>
+							<ul>
+								<li><a href="#">Lorem ipsum dolor</a></li>
+								<li><a href="#">Lorem ipsum dolor</a></li>
+								<li><a href="#">Lorem ipsum dolor</a></li>
+								<li><a href="#">Lorem ipsum dolor</a></li>
+							</ul>
+						</div>
+		      </div> <!-- /sidebar -->
+				
+					<div class="content-content">
+						here<br />here<br />here<br />here<br />here<br />here<br />here<br />
+						here<br />here<br />here<br />here<br />here<br />here<br />here<br />
+						here<br />here<br />here<br />here<br />here<br />here<br />here<br />
+						here<br />here<br />here<br />here<br />here<br />here<br />here<br />
+						
+					</div> <!-- /content-content -->
+
+	      </div> <!-- /content -->
+			</div> <!-- /outliner -->
+
+			<footer>
+        <p>&copy; 2012 site - <a href="#">Terms and Conditions</a> - <a href="#">Content Policy</a> - <a href="#">Privacy</a> - <a href="#">DMCA 2257</a></p>
+      </footer>
+
+    </div> <!-- /container-fluid -->
+
+  </body>
+</html>
