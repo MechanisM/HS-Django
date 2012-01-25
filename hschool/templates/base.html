@@ -1,8 +1,9 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>{% trans "Hentai School" %}</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -23,10 +24,10 @@
 			<div class="outliner">
 	      <div class="sidebar left span4">
 					<div id="logo">
-						<a href="#"><img src="{{ MEDIA_URL }}images/logo.png" /></a>
+						<a href="{% url home %}"><img src="{{ MEDIA_URL }}images/logo.png" /></a>
 					</div>
 					<div class="block">
-						<h4>{{ _("Popular Tags") }}</h4>
+						<h4>{% trans "Popular Tags" %}</h4>
 						<ul>
 							<li>Lorem ipsum dolor</li>
 							<li>Lorem ipsum dolor</li>
@@ -43,18 +44,18 @@
 					<div class="topbar row">
 			      <div class="topbar-inner">
 			        <ul class="nav">
-		            <li class="active"><a href="#">{{ _("Home") }}</a></li>
-		            <li><a href="#">{{ _("Series") }}</a></li>
-		            <li><a href="#">{{ _("Original Series") }}</a></li>
-								<li><a href="#">{{ _("Tags") }}</a></li>
-								<li><a href="#">{{ _("More") }}</a></li>
+		            <li class="active"><a href="{% url home %}">{% trans "Home" %}</a></li>
+		            <li><a href="#">{% trans "Series" %}</a></li>
+		            <li><a href="#">{% trans "Original Series" %}</a></li>
+								<li><a href="#">{% trans "Tags" %}</a></li>
+								<li><a href="#">{% trans "More" %}</a></li>
 		          </ul>
 			      </div>
 			    </div> <!-- /topbar -->
 
 					<div class="sidebar right span4">
 						<div class="block">
-							<h4>{{ _("Our Friends") }}</h4>
+							<h4>{% trans "Our Friends" %}</h4>
 							<ul>
 								<li><a href="#">Lorem ipsum dolor</a></li>
 								<li><a href="#">Lorem ipsum dolor</a></li>
@@ -65,18 +66,17 @@
 		      </div> <!-- /sidebar -->
 				
 					<div class="content-content">
-						here<br />here<br />here<br />here<br />here<br />here<br />here<br />
-						here<br />here<br />here<br />here<br />here<br />here<br />here<br />
-						here<br />here<br />here<br />here<br />here<br />here<br />here<br />
-						here<br />here<br />here<br />here<br />here<br />here<br />here<br />
-						
+
+						{% block content_content %}
+						{% endblock content_content %}
+
 					</div> <!-- /content-content -->
 
 	      </div> <!-- /content -->
 			</div> <!-- /outliner -->
 
 			<footer>
-        <p>&copy; 2012 site - <a href="#">Terms and Conditions</a> - <a href="#">Content Policy</a> - <a href="#">Privacy</a> - <a href="#">DMCA 2257</a></p>
+        <p>&copy; 2012 site - <a href="#">{% trans "Terms and Conditions" %}</a> - <a href="#">{% trans "Content Policy" %}</a> - <a href="#">{% trans "Privacy" %}</a> - <a href="#">{% trans "DMCA 2257" %}</a></p>
       </footer>
 
     </div> <!-- /container-fluid -->

@@ -4,13 +4,13 @@ import os
 from setuptools import setup, find_packages
 
 
-requires = ['Django', 'django-extensions', 'Werkzeug']
+requires = ['Django', 'django-extensions', 'Werkzeug', 'django-taggit', 'South']
 
 setup(name='hschool',
       version='0.1',
       description='',
       author='',
-      author_email=',
+      author_email='',
       url='',
       keywords='',
       packages=find_packages(),

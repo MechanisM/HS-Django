@@ -14,7 +14,6 @@
     width: 220px;
     background: #efefef;
 }
-
 .sidebar.right {
     float: right;
     margin-left: 0;
@@ -24,6 +23,7 @@
     position: static;
     border-bottom: 1px solid #b3b3b3;
     padding: 15px 0 10px 17px;
+    background: url(/media/images/topbar-left-bg.png) #efefef repeat-y left top;
 }
 .topbar-inner {
     background: none;
@@ -35,6 +35,7 @@
     box-shadow: 3px 3px 0px #AFAEAE;
     margin: 0 15px 0 0;
     border: 1px solid #dcdcdc;
+    background: #ffffff;
 }
 .topbar .nav a:hover,
 .topbar .nav .active a  {
@@ -47,6 +48,12 @@
     margin: 20px auto 10px auto;
 }
 
+.block ul li {
+    line-height: 20px;
+}
+.block ul a {
+    text-decoration: underline;
+}
 .block h4 {
     padding: 0 10px;
     font-weight: normal;
@@ -79,20 +86,30 @@ footer {
     text-align: center;
 }
 
-
-/*html, body {
-    height: 100%;
+.hentai-item {
+    overflow: hidden;
+    margin: 0 0 20px 0;
+}
+.hentai-item.last {
+    margin-bottom: 0;
+}
+.hentai-item .thumb {
+    background: #cccccc;
+    width: 100px;
+    height: 130px;
+    float: left;
+    margin: 0 15px 0 0;
+}
+.hentai-item .info {
+    float: left;
 }
 
-.container-fluid { 
-    min-height: 100%;
+.hentai-item .info .title {
+    font-weight: bold;
+    color: #EF5457;
+    font-size: 16px;
+    margin: 0 0 10px 0;
 }
-
-.filler {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 0;
-}*/
+.hentai-item .hentai-actions {
+    margin: 10px 0 0 0;
+}

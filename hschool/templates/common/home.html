@@ -1,1 +1,35 @@
 {% extends 'base.html' %}
+{% load i18n %}
+
+{% block content_content %}
+<div class="hentai-item">
+	<div class="thumb"></div>
+	<div class="info">
+		<div class="title">Lorem ipsum dolor sit amet</div>
+		<div class="date-added">Added on: June 03, 2012</div>
+		<div class="grouping">
+			Category: <a href="#">Lorem</a>
+			Series: <a href="#">Lorem</a>
+			Artist: <a href="#">Lorem</a>
+		</div>
+		<div class="hentai-actions">
+			<a href="#">{% trans "View Online" %}</a> | <a href="#">{% trans "Download High Res ZIP" %}</a>
+		</div>
+	</div>
+</div>
+<div class="hentai-item last">
+	<div class="thumb"></div>
+	<div class="info">
+		<div class="title">Lorem ipsum dolor sit amet</div>
+		<div class="date-added">Added on: June 03, 2012</div>
+		<div class="grouping">
+			Category: <a href="#">Lorem</a>
+			Series: <a href="#">Lorem</a>
+			Artist: <a href="#">Lorem</a>
+		</div>
+		<div class="hentai-actions">
+			<a href="#">{% trans "View Online" %}</a> | <a href="#">{% trans "Download High Res ZIP" %}</a>
+		</div>
+	</div>
+</div>
+{% endblock content_content %}
