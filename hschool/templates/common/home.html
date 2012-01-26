@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content_content %}
-{% if hentais %}
+{% if hentais.object_list %}
 	{% for hentai in hentais.object_list %}
 		<div class="hentai-item">
 			<div class="thumb"></div>

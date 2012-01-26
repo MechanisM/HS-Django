@@ -3,7 +3,7 @@
 
 {% block content_content %}
 <div class="artist-listing">
-	{% if artist_list %}
+	{% if artist_list.object_list %}
 		<div class="listing-wrapper">
 			{% for tag in artist_list.object_list %}
 				{% if forloop.first or forloop.counter == 51 %}
