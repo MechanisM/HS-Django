@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load thumbnail %}
 
 {% block content_content %}
 {% if hentais.object_list %}
 	{% for hentai in hentais.object_list %}
 		<div class="hentai-item">
-			<div class="thumb"></div>
+			<div class="thumb">
+				{% thumbnail hentai.thumbnail "100x130" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% endthumbnail %}
+			</div>
 			<div class="info">
 				<div class="title">{{ hentai.title }}</div>
 				<div class="date-added">

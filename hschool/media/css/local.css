@@ -100,6 +100,7 @@ footer {
     height: 130px;
     float: left;
     margin: 0 15px 0 0;
+    border: 1px solid #cccccc;
 }
 .hentai-item .info {
     float: left;

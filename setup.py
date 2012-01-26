@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 
 requires = ['Django', 'django-extensions', 'Werkzeug', 'django-taggit', 'South',
-            'PIL']
+            'PIL', 'sorl-thumbnail==11.09']
 
 setup(name='hschool',
       version='0.1',

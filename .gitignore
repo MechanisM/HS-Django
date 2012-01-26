@@ -10,3 +10,4 @@
 .DS_Store
 *.db
 settings_local.py
+hschool/media/cache/*
