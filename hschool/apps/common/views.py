@@ -2,7 +2,7 @@
 
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 
 from common.models import Hentai, Category, SeriesTag, ArtistTag, TagsTag
