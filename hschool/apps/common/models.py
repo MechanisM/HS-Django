@@ -10,8 +10,8 @@ from common.utils import get_thumbnail_path
 
 class TagsTag(TagBase):
     class Meta:
-        verbose_name = _("TagsTag")
-        verbose_name_plural = _("TagsTags")
+        verbose_name = _("Tags Tag")
+        verbose_name_plural = _("Tags Tags")
 
 
 class TagsTaggedItem(GenericTaggedItemBase):
@@ -20,8 +20,8 @@ class TagsTaggedItem(GenericTaggedItemBase):
 
 class SeriesTag(TagBase):
     class Meta:
-        verbose_name = _("SeriesTag")
-        verbose_name_plural = _("SeriesTags")
+        verbose_name = _("Series Tag")
+        verbose_name_plural = _("Series Tags")
 
 
 class SeriesTaggedItem(GenericTaggedItemBase):
@@ -30,8 +30,8 @@ class SeriesTaggedItem(GenericTaggedItemBase):
 
 class ArtistTag(TagBase):
     class Meta:
-        verbose_name = _("ArtistTag")
-        verbose_name_plural = _("ArtistTags")
+        verbose_name = _("Artist Tag")
+        verbose_name_plural = _("Artist Tags")
 
 
 class ArtistTaggedItem(GenericTaggedItemBase):

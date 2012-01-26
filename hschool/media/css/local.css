@@ -5,6 +5,7 @@
     margin-right: 220px;
     padding: 17px 17px 17px 0;
     background: url(/media/images/sidebar-right-bg.png) repeat-y right top;
+    min-height: 300px;
 }
 
 .sidebar.left {
@@ -112,4 +113,22 @@ footer {
 }
 .hentai-item .hentai-actions {
     margin: 10px 0 0 0;
+}
+
+.add-friend-link {
+    font-weight: bold;
+}
+
+.listing-wrapper ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    float: left;
+    min-width: 350px;
+}
+.listing-wrapper a {
+    text-decoration: underline;
+}
+.listing-wrapper {
+    overflow: hidden;
 }

@@ -15,6 +15,13 @@
     <!-- Le styles -->
     <link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet" />
 		<link href="{{ MEDIA_URL }}css/local.css" rel="stylesheet" />
+
+		<!-- Fancybox -->
+		<link href="{{ MEDIA_URL }}js/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/jquery-1.4.3.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+		<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/scripts.js"></script>
   </head>
 
   <body>
@@ -26,16 +33,20 @@
 					<div id="logo">
 						<a href="{% url home %}"><img src="{{ MEDIA_URL }}images/logo.png" /></a>
 					</div>
+
 					<div class="block">
 						<h4>{% trans "Popular Tags" %}</h4>
-						<ul>
-							<li>Lorem ipsum dolor</li>
-							<li>Lorem ipsum dolor</li>
-							<li>Lorem ipsum dolor</li>
-							<li>Lorem ipsum dolor</li>
-							<li>Lorem ipsum dolor</li>
-						</ul>
+						{% if series_tags %}
+							<ul>
+							{% for tag in series_tags %}
+								<li><a href="#">{{ tag.name }}</a> ({{ tag.items.count }})</li>
+							{% endfor %}
+							</ul>
+						{% else %}
+							<p>{% trans "There are no series tags yet." %}</p>
+						{% endif %}
 					</div>
+
 	      </div> <!-- /sidebar -->
 
 			
@@ -44,11 +55,10 @@
 					<div class="topbar row">
 			      <div class="topbar-inner">
 			        <ul class="nav">
-		            <li class="active"><a href="{% url home %}">{% trans "Home" %}</a></li>
-		            <li><a href="#">{% trans "Series" %}</a></li>
-		            <li><a href="#">{% trans "Original Series" %}</a></li>
-								<li><a href="#">{% trans "Tags" %}</a></li>
-								<li><a href="#">{% trans "More" %}</a></li>
+		            <li {% if request.path == '/' %}class="active"{% endif %}><a href="{% url home %}">{% trans "Home" %}</a></li>
+		            <li {% if request.path == '/series/' %}class="active"{% endif %}><a href="{% url series %}">{% trans "Series" %}</a></li>
+		            <li {% if request.path == '/artist/' %}class="active"{% endif %}><a href="{% url artist %}">{% trans "Artist" %}</a></li>
+								<li {% if request.path == '/tags/' %}class="active"{% endif %}><a href="{% url tags %}">{% trans "Tags" %}</a></li>
 		          </ul>
 			      </div>
 			    </div> <!-- /topbar -->
@@ -61,6 +71,8 @@
 								<li><a href="#">Lorem ipsum dolor</a></li>
 								<li><a href="#">Lorem ipsum dolor</a></li>
 								<li><a href="#">Lorem ipsum dolor</a></li>
+								<li>&nbsp;</li>
+								<li><a href="#" class="add-friend-link">{% trans "Add your friend link here" %}</a></li>
 							</ul>
 						</div>
 		      </div> <!-- /sidebar -->

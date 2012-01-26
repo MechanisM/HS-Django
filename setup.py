@@ -4,7 +4,8 @@ import os
 from setuptools import setup, find_packages
 
 
-requires = ['Django', 'django-extensions', 'Werkzeug', 'django-taggit', 'South']
+requires = ['Django', 'django-extensions', 'Werkzeug', 'django-taggit', 'South',
+            'PIL']
 
 setup(name='hschool',
       version='0.1',
