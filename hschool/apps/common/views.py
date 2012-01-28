@@ -179,10 +179,11 @@ def like(request, hentai_id):
         if like_q.count() > 0:
             return HttpResponseRedirect(request.GET.get('destination', '/'))
 
-    like = Like(hentai=hentai, user=request.user)
+    if request.user.is_anonymous():
+        like = Like(hentai=hentai)
+    else:
+        like = Like(hentai=hentai, user=request.user)
     like.save()
-    ip_address = request.META.get('HTTP_X_FORWARDED_FOR', None) or request.META.get('REMOTE_ADDR', None)
-    logger.debug("IP ADDRESS: %s" % ip_address)
     response = HttpResponseRedirect(request.GET.get('destination', '/'))
     response.set_cookie("has_liked", True)
     return response

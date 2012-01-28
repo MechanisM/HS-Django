@@ -103,7 +103,7 @@ footer {
     border: 1px solid #cccccc;
 }
 .hentai-item .info {
-    float: left;
+    margin-left: 115px;
 }
 
 .hentai-item .info .title {
