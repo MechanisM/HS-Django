@@ -4,13 +4,19 @@ from django.contrib import admin
 
 from common.models import (Hentai, TagsTag, TagsTaggedItem, SeriesTag,
                            SeriesTaggedItem, ArtistTag, ArtistTaggedItem,
-                           Category)
+                           Category, Like)
+
+
+def feature_items(self, request, queryset):
+    queryset.update(is_featured=True)
+feature_items.short_description = "Feature selected items"
 
 
 class HentaiAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('title', 'is_featured')
+    actions = [feature_items]
 
-    
+
 class TagsTaggedItemInline(admin.StackedInline):
     model = TagsTaggedItem
 
@@ -38,8 +44,14 @@ class ArtistTagAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     pass
 
+
+class LikeAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Hentai, HentaiAdmin)
 admin.site.register(TagsTag, TagsTagAdmin)
 admin.site.register(SeriesTag, SeriesTagAdmin)
 admin.site.register(ArtistTag, ArtistTagAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Like, LikeAdmin)

@@ -14,82 +14,88 @@
 
     <!-- Le styles -->
     <link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet" />
-		<link href="{{ MEDIA_URL }}css/local.css" rel="stylesheet" />
+    <link href="{{ MEDIA_URL }}css/local.css" rel="stylesheet" />
 
-		<!-- Fancybox -->
-		<link href="{{ MEDIA_URL }}js/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" />
-		<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/jquery-1.4.3.min.js"></script>
-		<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <!-- Fancybox -->
+    <link href="{{ MEDIA_URL }}js/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" />
+    <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/jquery-1.4.3.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
-		<script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/scripts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ MEDIA_URL }}js/scripts.js"></script>
   </head>
 
   <body>
 
     <div class="container-fluid">
 
-			<div class="outliner">
-	      <div class="sidebar left span4">
-					<div id="logo">
-						<a href="{% url home %}"><img src="{{ MEDIA_URL }}images/logo.png" /></a>
-					</div>
+      <div class="outliner">
+        <div class="sidebar left span4">
+          <div id="logo">
+            <a href="{% url home %}"><img src="{{ MEDIA_URL }}images/logo.png" /></a>
+          </div>
 
-					<div class="block">
-						<h4>{% trans "Popular Tags" %}</h4>
-						{% if series_tags %}
-							<ul>
-							{% for tag in series_tags %}
-								<li><a href="#">{{ tag.name }}</a> ({{ tag.items.count }})</li>
-							{% endfor %}
-							</ul>
-						{% else %}
-							<ul>
-								<li>{% trans "There are no series tags yet." %}</li>
-							</ul>
-						{% endif %}
-					</div>
+          <div id="search-form">
+            <form method="GET" action="{% url hentai_search %}">
+              <input type="text" id="search" name="q" placeholder="{% trans 'Search site' %}" />
+            </form>
+          </div>
 
-	      </div> <!-- /sidebar -->
+          <div class="block popular-tags">
+            <h4>{% trans "Popular Tags" %}</h4>
+            {% if series_tags %}
+              <ul>
+              {% for tag in series_tags %}
+                <li><a href="{% url tag_detail 'series' tag.id %}">{{ tag.name }}</a> {{ tag.items.count }}</li>
+              {% endfor %}
+              </ul>
+            {% else %}
+              <ul>
+                <li>{% trans "There are no series tags yet." %}</li>
+              </ul>
+            {% endif %}
+          </div>
 
-			
-	      <div class="content row">
+        </div> <!-- /sidebar -->
 
-					<div class="topbar row">
-			      <div class="topbar-inner">
-			        <ul class="nav">
-		            <li {% if request.path == '/' %}class="active"{% endif %}><a href="{% url home %}">{% trans "Home" %}</a></li>
-		            <li {% if request.path == '/series/' %}class="active"{% endif %}><a href="{% url series %}">{% trans "Series" %}</a></li>
-		            <li {% if request.path == '/artist/' %}class="active"{% endif %}><a href="{% url artist %}">{% trans "Artist" %}</a></li>
-								<li {% if request.path == '/tags/' %}class="active"{% endif %}><a href="{% url tags %}">{% trans "Tags" %}</a></li>
-		          </ul>
-			      </div>
-			    </div> <!-- /topbar -->
+      
+        <div class="content row">
 
-					<div class="sidebar right span4">
-						<div class="block">
-							<h4>{% trans "Our Friends" %}</h4>
-							<ul>
-								<li><a href="#">Lorem ipsum dolor</a></li>
-								<li><a href="#">Lorem ipsum dolor</a></li>
-								<li><a href="#">Lorem ipsum dolor</a></li>
-								<li><a href="#">Lorem ipsum dolor</a></li>
-								<li>&nbsp;</li>
-								<li><a href="#" class="add-friend-link">{% trans "Add your friend link here" %}</a></li>
-							</ul>
-						</div>
-		      </div> <!-- /sidebar -->
-				
-					<div class="content-content">
+          <div class="topbar row">
+            <div class="topbar-inner">
+              <ul class="nav">
+                <li {% if request.path == '/' or request.path == '/featured/' or request.path == '/most-liked/' %}class="active"{% endif %}><a href="{% url home %}">{% trans "Home" %}</a></li>
+                <li {% if request.path == '/series/' %}class="active"{% endif %}><a href="{% url series %}">{% trans "Series" %}</a></li>
+                <li {% if request.path == '/artist/' %}class="active"{% endif %}><a href="{% url artist %}">{% trans "Artist" %}</a></li>
+                <li {% if request.path == '/tags/' %}class="active"{% endif %}><a href="{% url tags %}">{% trans "Tags" %}</a></li>
+              </ul>
+            </div>
+          </div> <!-- /topbar -->
 
-						{% block content_content %}
-						{% endblock content_content %}
+          <div class="sidebar right span4">
+            <div class="block">
+              <h4>{% trans "Our Friends" %}</h4>
+              <ul>
+                <li><a href="#">Lorem ipsum dolor</a></li>
+                <li><a href="#">Lorem ipsum dolor</a></li>
+                <li><a href="#">Lorem ipsum dolor</a></li>
+                <li><a href="#">Lorem ipsum dolor</a></li>
+                <li>&nbsp;</li>
+                <li><a href="#" class="add-friend-link">{% trans "Add your friend link here" %}</a></li>
+              </ul>
+            </div>
+          </div> <!-- /sidebar -->
+        
+          <div class="content-content">
 
-					</div> <!-- /content-content -->
+            {% block content_content %}
+            {% endblock content_content %}
 
-	      </div> <!-- /content -->
-			</div> <!-- /outliner -->
+          </div> <!-- /content-content -->
 
-			<footer>
+        </div> <!-- /content -->
+      </div> <!-- /outliner -->
+
+      <footer>
         <p>&copy; 2012 site - <a href="#">{% trans "Terms and Conditions" %}</a> - <a href="#">{% trans "Content Policy" %}</a> - <a href="#">{% trans "Privacy" %}</a> - <a href="#">{% trans "DMCA 2257" %}</a></p>
       </footer>
 

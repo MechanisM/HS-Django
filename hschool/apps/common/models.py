@@ -56,7 +56,7 @@ class Hentai(models.Model):
                                   upload_to=get_thumbnail_path)
     title = models.CharField(max_length=200)
     url = models.URLField()
-    download_url = models.URLField()
+    download_url = models.URLField(blank=True, null=True)
     category = models.ForeignKey(Category, related_name='hentais', null=True,
                                  blank=True)
     tags = TaggableManager(through=TagsTaggedItem, blank=True)
@@ -64,8 +64,14 @@ class Hentai(models.Model):
                              through=SeriesTaggedItem, blank=True)
     artist = TaggableManager(verbose_name=_("Artist Tags"),
                              through=ArtistTaggedItem, blank=True)
+    is_featured = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.title
+
+
+class Like(models.Model):
+    hentai = models.ForeignKey(Hentai, related_name='likes')
+    created = models.DateTimeField(auto_now_add=True)

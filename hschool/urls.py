@@ -14,6 +14,11 @@ urlpatterns = patterns('',
     url(r'^series/$', 'common.views.series', name='series'),
     url(r'^artist/$', 'common.views.artist', name='artist'),
     url(r'^tags/$', 'common.views.tags', name='tags'),
+    url(r'^tags/(?P<tag_type>\w+)/(?P<tag_id>\d+)$', 'common.views.tag_detail', name='tag_detail'),
+    url(r'^search/$', 'common.views.search', name='hentai_search'),
+    url(r'^like/(?P<hentai_id>\d+)$', 'common.views.like', name='like'),
+    url(r'^featured/$', 'common.views.featured', name='featured'),
+    url(r'^most-liked/$', 'common.views.most_liked', name='most_liked'),
 )
 
 # in DEBUG mode, serve media files through Django.

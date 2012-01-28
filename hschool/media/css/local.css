@@ -133,3 +133,79 @@ footer {
 .listing-wrapper {
     overflow: hidden;
 }
+
+#recommended-tags {
+    margin: 0 0 20px 0;
+}
+#recommended-tags span {
+    font-size: 16px;
+    margin: 0 10px 0 0;
+    display: inline-block;
+}
+#recommended-tags a {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.tagged-items h2,
+.search-result h2 {
+    font-weight: normal;
+    font-size: 20px;
+    margin: 0 0 20px 0;
+}
+
+.tags-wrapper a,
+.popular-tags a {
+    display: inline-block;
+    background: #e7e7e7;
+    border-right: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+    padding: 0 2px;
+    font-size: 11px;
+    color: #717171;
+}
+.popular-tags ul a {
+    text-decoration: none;
+}
+.popular-tags ul a:hover {
+    text-decoration: underline;
+}
+.tags-wrapper .tags {
+    margin: 5px 0 0 0;
+}
+
+#search-form {
+    width: 170px;
+    margin: 0 auto;
+}
+#search-form #search {
+    background: url(/media/images/search-icon.png) #ffffff no-repeat 98% 50%;
+    width: 150px;
+    padding-right: 20px;
+}
+
+.like-wrapper {
+    float: right;
+    width: 40px;
+    height: 30px;
+    box-shadow: 3px 3px 0px #AFAEAE;
+    border: 1px solid #dcdcdc;
+    padding: 10px;
+}
+.like-wrapper .counter {
+    font-size: 14px;
+    text-align: center;
+    color: #666666;
+}
+.like-wrapper a {
+    display: inline-block;
+    background: url(/media/images/like-thumb.png) no-repeat 0% 30%;
+    padding: 0 0 0 17px;
+    color: #666666;
+    text-decoration: underline;
+}
+
+.tabs {
+    height: 35px;
+    padding-left: 20px;
+}

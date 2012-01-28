@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load thumbnail %}
+
+{% block content_content %}
+<div class="tagged-items">
+
+  <h2>{{ current_tag }}</h2>
+
+  {% if hentais.object_list %}
+    {% for tagged_hentai in hentais.object_list %}
+      <div class="hentai-item">
+        <div class="like-wrapper">
+          <div class="counter">{{ tagged_hentai.content_object.likes.count }}</div>
+          <a href="{% url like tagged_hentai.content_object.id %}?destination={{ request.path }}">{% trans "Like" %}</a>
+        </div>
+        <div class="thumb">
+          {% thumbnail tagged_hentai.content_object.thumbnail "100x130" crop="center" as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+          {% endthumbnail %}
+        </div>
+        <div class="info">
+          <div class="title">{{ tagged_hentai.content_object.title }}</div>
+          <div class="date-added">
+            {% blocktrans with created=tagged_hentai.content_object.created %}
+              Added on: {{ created }}
+            {% endblocktrans %}
+          </div>
+          <div class="tags-wrapper">
+            {% trans "Category" %}: <a href="#">{{ tagged_hentai.content_object.category.name }}</a>
+            {% with tagged_hentai.content_object.series.all as series_tags %}
+              {% if series_tags %}
+                {% trans "Series" %}: <a href="{% url tag_detail 'series' series_tags.0.id %}">{{ series_tags.0 }}</a>
+              {% endif %}
+            {% endwith %}
+            {% with tagged_hentai.content_object.artist.all as artist_tags %}
+              {% if artist_tags %}
+                {% trans "Artist" %}: <a href="{% url tag_detail 'artist' artist_tags.0.id %}">{{ artist_tags.0 }}</a>
+              {% endif %}
+            {% endwith %}
+            {% with tagged_hentai.content_object.tags.all as tags_tags %}
+            {% if tags_tags %}
+              <div class="tags">
+                {% trans "Tags" %}: 
+                {% for tag in tags_tags %}
+                  <a href="{% url tag_detail 'tags' tag.id %}">{{ tag.name }}</a>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endwith %}
+          </div>
+          <div class="hentai-actions">
+            <a class="view-online" href="{{ tagged_hentai.content_object.url }}">{% trans "View Online" %}</a>{% if tagged_hentai.content_object.download_url %} | <a href="{{ tagged_hentai.content_object.download_url }}">{% trans "Download High Res ZIP" %}</a>{% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% if hentais.paginator.num_pages > 1 %}
+    <div class="pagination">
+      <div class="pagination">
+        <ul>
+          <li class="prev {% if not hentais.has_previous %}disabled{% endif %}">
+            <a href="?page={{ hentais.previous_page_number }}">&larr; {% trans "Previous" %}</a>
+          </li>
+          <li class="disabled">
+            <a href="#">Page {{ hentais.number }} of {{ hentais.paginator.num_pages }}</a>
+          </li>
+          <li class="next {% if not hentais.has_next %}disabled{% endif %}">
+            <a href="?page={{ hentais.next_page_number }}">{% trans "Next" %} &rarr;</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+  {% else %}
+    <p>{% trans "There are no hentais yet." %}</p>
+  {% endif %}
+</div>
+{% endblock content_content %}

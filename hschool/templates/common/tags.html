@@ -3,36 +3,38 @@
 
 {% block content_content %}
 <div class="tags-listing">
-	{% if tags_list.object_list %}
-		<div class="listing-wrapper">
-			{% for tag in tags_list.object_list %}
-				{% if forloop.first or forloop.counter == 51 %}
-				<ul>
-				{% endif %}
-				<li><a href="#">{{ tag.name }}</a> ({{ tag.items.count }})</li>
-				{% if forloop.last or forloop.counter == 50 %}
-				</ul>
-				{% endif %}
-			{% endfor %}
-		</div>
+  {% if tags_list.object_list %}
+    <div class="listing-wrapper">
+      {% for tag in tags_list.object_list %}
+        {% if forloop.first or forloop.counter == 51 %}
+        <ul>
+        {% endif %}
+        <li><a href="{% url tag_detail 'tags' tag.id %}">{{ tag.name }}</a> ({{ tag.items.count }})</li>
+        {% if forloop.last or forloop.counter == 50 %}
+        </ul>
+        {% endif %}
+      {% endfor %}
+    </div>
 
-		<div class="pagination">
-			<div class="pagination">
-			  <ul>
-			    <li class="prev {% if not tags_list.has_previous %}disabled{% endif %}">
-						<a href="?page={{ tags_list.previous_page_number }}">&larr; {% trans "Previous" %}</a>
-					</li>
-			    <li class="disabled">
-						<a href="#">Page {{ tags_list.number }} of {{ tags_list.paginator.num_pages }}</a>
-					</li>
-			    <li class="next {% if not tags_list.has_next %}disabled{% endif %}">
-						<a href="?page={{ tags_list.next_page_number }}">{% trans "Next" %} &rarr;</a>
-					</li>
-			  </ul>
-			</div>
-		</div>
-	{% else %}
-		<p>{% trans "There are no tags yet." %}</p>
-	{% endif %}
+    {% if tags_list.paginator.num_pages > 1 %}
+    <div class="pagination">
+      <div class="pagination">
+        <ul>
+          <li class="prev {% if not tags_list.has_previous %}disabled{% endif %}">
+            <a href="?page={{ tags_list.previous_page_number }}">&larr; {% trans "Previous" %}</a>
+          </li>
+          <li class="disabled">
+            <a href="#">Page {{ tags_list.number }} of {{ tags_list.paginator.num_pages }}</a>
+          </li>
+          <li class="next {% if not tags_list.has_next %}disabled{% endif %}">
+            <a href="?page={{ tags_list.next_page_number }}">{% trans "Next" %} &rarr;</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+  {% else %}
+    <p>{% trans "There are no tags yet." %}</p>
+  {% endif %}
 </div>
 {% endblock content_content %}

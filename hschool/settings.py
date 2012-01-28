@@ -120,7 +120,8 @@ INSTALLED_APPS = (
     'south',
     'sorl.thumbnail',
     'common',
-    'taggit'
+    'taggit',
+    'haystack'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -171,6 +172,12 @@ LOGGING = {
         },
     }
 }
+
+HAYSTACK_SITECONF = 'hschool.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = path('indexes')
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 30
+HAYSTACK_DEFAULT_OPERATOR = 'OR'
 
 # include local settings
 try:

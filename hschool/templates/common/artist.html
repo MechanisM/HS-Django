@@ -3,36 +3,38 @@
 
 {% block content_content %}
 <div class="artist-listing">
-	{% if artist_list.object_list %}
-		<div class="listing-wrapper">
-			{% for tag in artist_list.object_list %}
-				{% if forloop.first or forloop.counter == 51 %}
-				<ul>
-				{% endif %}
-				<li><a href="#">{{ tag.name }}</a> ({{ tag.items.count }})</li>
-				{% if forloop.last or forloop.counter == 50 %}
-				</ul>
-				{% endif %}
-			{% endfor %}
-		</div>
+  {% if artist_list.object_list %}
+    <div class="listing-wrapper">
+      {% for tag in artist_list.object_list %}
+        {% if forloop.first or forloop.counter == 51 %}
+        <ul>
+        {% endif %}
+        <li><a href="{% url tag_detail 'artist' tag.id %}">{{ tag.name }}</a> ({{ tag.items.count }})</li>
+        {% if forloop.last or forloop.counter == 50 %}
+        </ul>
+        {% endif %}
+      {% endfor %}
+    </div>
 
-		<div class="pagination">
-			<div class="pagination">
-			  <ul>
-			    <li class="prev {% if not artist_list.has_previous %}disabled{% endif %}">
-						<a href="?page={{ artist_list.previous_page_number }}">&larr; {% trans "Previous" %}</a>
-					</li>
-			    <li class="disabled">
-						<a href="#">Page {{ artist_list.number }} of {{ artist_list.paginator.num_pages }}</a>
-					</li>
-			    <li class="next {% if not artist_list.has_next %}disabled{% endif %}">
-						<a href="?page={{ artist_list.next_page_number }}">{% trans "Next" %} &rarr;</a>
-					</li>
-			  </ul>
-			</div>
-		</div>
-	{% else %}
-		<p>{% trans "There are no artist tags yet." %}</p>
-	{% endif %}
+    {% if artist_list.paginator.num_pages > 1 %}
+    <div class="pagination">
+      <div class="pagination">
+        <ul>
+          <li class="prev {% if not artist_list.has_previous %}disabled{% endif %}">
+            <a href="?page={{ artist_list.previous_page_number }}">&larr; {% trans "Previous" %}</a>
+          </li>
+          <li class="disabled">
+            <a href="#">Page {{ artist_list.number }} of {{ artist_list.paginator.num_pages }}</a>
+          </li>
+          <li class="next {% if not artist_list.has_next %}disabled{% endif %}">
+            <a href="?page={{ artist_list.next_page_number }}">{% trans "Next" %} &rarr;</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+  {% else %}
+    <p>{% trans "There are no artist tags yet." %}</p>
+  {% endif %}
 </div>
 {% endblock content_content %}

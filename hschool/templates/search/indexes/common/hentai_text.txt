@@ -1,0 +1,12 @@
+{{ object.title }}
+{% for tag in object.series.all %}
+{{ tag.name }} 
+{% endfor %}
+
+{% for tag in object.artist.all %}
+{{ tag.name }} 
+{% endfor %}
+
+{% for tag in object.tags.all %}
+{{ tag.name }} 
+{% endfor %}

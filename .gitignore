@@ -11,3 +11,5 @@
 *.db
 settings_local.py
 hschool/media/cache/*
+hschool/indexes/_*
+MAIN_WRITELOCK
