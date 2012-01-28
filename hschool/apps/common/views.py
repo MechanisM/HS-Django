@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import logging
 from datetime import datetime, timedelta
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
@@ -13,6 +14,8 @@ from haystack.views import SearchView
 from common.models import (Hentai, Category, SeriesTag, ArtistTag, TagsTag,
                            Like)
 
+
+logger = logging.getLogger("hschool")
 
 def home(request):
     hentai_list = Hentai.objects.all().order_by('-created')
@@ -126,10 +129,18 @@ class HSchoolSearchView(SearchView):
 
 
 def like(request, hentai_id):
+    has_liked = bool(request.COOKIES.get('has_liked', False))
+    if has_liked:
+        return HttpResponseRedirect(request.GET.get('destination', '/'))
+
     hentai = get_object_or_404(Hentai, id=hentai_id)
     like = Like(hentai=hentai)
     like.save()
-    return HttpResponseRedirect(request.GET.get('destination', '/'))
+    ip_address = request.META.get('HTTP_X_FORWARDED_FOR', None) or request.META.get('REMOTE_ADDR', None)
+    logger.debug("IP ADDRESS: %s" % ip_address)
+    response = HttpResponseRedirect(request.GET.get('destination', '/'))
+    response.set_cookie("has_liked", True)
+    return response
 
 
 def featured(request):
