@@ -50,7 +50,7 @@
           {% endwith %}
           </div>
           <div class="hentai-actions">
-            <a class="view-online" href="{{ tagged_hentai.content_object.url }}">{% trans "View Online" %}</a>{% if tagged_hentai.content_object.download_url %} | <a href="{{ tagged_hentai.content_object.download_url }}">{% trans "Download High Res ZIP" %}</a>{% endif %}
+            <a class="view-online" href="{{ tagged_hentai.content_object.url }}">{% trans "View Online" %}</a>{% if tagged_hentai.content_object.download_url %} | <a href="{{ tagged_hentai.content_object.download_url }}" target="_blank">{% trans "Download High Res ZIP" %}</a>{% endif %}
           </div>
         </div>
       </div>
