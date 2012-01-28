@@ -18,18 +18,58 @@ from common.models import (Hentai, Category, SeriesTag, ArtistTag, TagsTag,
 logger = logging.getLogger("hschool")
 
 def home(request):
-    hentai_list = Hentai.objects.all().order_by('-created')
-    paginator = Paginator(hentai_list, 10)
+    new_list = Hentai.objects.all().order_by('-created')
+
+    featured_list = new_list.filter(is_featured=True).order_by('-created')
+
+    start_date = datetime.now() - timedelta(days=30)
+    mostliked_list = new_list.filter(likes__created__gte=start_date)
+    mostliked_list = mostliked_list.annotate(likes_count=Count('likes'))
+    mostliked_list = mostliked_list.order_by('-likes_count')
+
+    new_paginator = Paginator(new_list, 1)
+    featured_paginator = Paginator(featured_list, 1)
+    mostliked_paginator = Paginator(mostliked_list, 1)
+
+    tab = request.GET.get('tab', 'new')
     page = request.GET.get('page', 1)
+
+    # new
     try:
-        hentais = paginator.page(page)
+        if tab == 'new':
+            new = new_paginator.page(page)
+        else:
+            raise PageNotAnInteger
     except PageNotAnInteger:
-        hentais = paginator.page(1)
+        new = new_paginator.page(1)
     except EmptyPage:
-        hentais = paginator.page(paginator.num_pages)
+        new = new_paginator.page(new_paginator.num_pages)
+
+    # featured
+    try:
+        if tab == 'featured':
+            featured = featured_paginator.page(page)
+        else:
+            raise PageNotAnInteger
+    except PageNotAnInteger:
+        featured = featured_paginator.page(1)
+    except EmptyPage:
+        featured = featured_paginator.page(featured_paginator.num_pages)
+
+    # most liked
+    try:
+        if tab == 'mostliked':
+            mostliked = mostliked_paginator.page(page)
+        else:
+            raise PageNotAnInteger
+    except PageNotAnInteger:
+        mostliked = mostliked_paginator.page(1)
+    except EmptyPage:
+        mostliked = mostliked_paginator.page(mostliked_paginator.num_pages)
 
     return render_to_response('common/home.html',
-                              {'hentais': hentais},
+                              {'new': new, 'featured': featured,
+                               'mostliked': mostliked, 'tab': tab},
                               RequestContext(request))
 
 
@@ -129,12 +169,17 @@ class HSchoolSearchView(SearchView):
 
 
 def like(request, hentai_id):
-    has_liked = bool(request.COOKIES.get('has_liked', False))
-    if has_liked:
-        return HttpResponseRedirect(request.GET.get('destination', '/'))
-
     hentai = get_object_or_404(Hentai, id=hentai_id)
-    like = Like(hentai=hentai)
+
+    has_liked = bool(request.COOKIES.get('has_liked', False))
+    if has_liked and request.user.is_anonymous():
+        return HttpResponseRedirect(request.GET.get('destination', '/'))
+    else:
+        like_q = hentai.likes.filter(user=request.user)
+        if like_q.count() > 0:
+            return HttpResponseRedirect(request.GET.get('destination', '/'))
+
+    like = Like(hentai=hentai, user=request.user)
     like.save()
     ip_address = request.META.get('HTTP_X_FORWARDED_FOR', None) or request.META.get('REMOTE_ADDR', None)
     logger.debug("IP ADDRESS: %s" % ip_address)
@@ -143,36 +188,36 @@ def like(request, hentai_id):
     return response
 
 
-def featured(request):
-    hentai_list = Hentai.objects.filter(is_featured=True).order_by('-created')
-    paginator = Paginator(hentai_list, 10)
-    page = request.GET.get('page', 1)
-    try:
-        hentais = paginator.page(page)
-    except PageNotAnInteger:
-        hentais = paginator.page(1)
-    except EmptyPage:
-        hentais = paginator.page(paginator.num_pages)
+# def featured(request):
+#     hentai_list = Hentai.objects.filter(is_featured=True).order_by('-created')
+#     paginator = Paginator(hentai_list, 10)
+#     page = request.GET.get('page', 1)
+#     try:
+#         hentais = paginator.page(page)
+#     except PageNotAnInteger:
+#         hentais = paginator.page(1)
+#     except EmptyPage:
+#         hentais = paginator.page(paginator.num_pages)
 
-    return render_to_response('common/home.html',
-                              {'hentais': hentais},
-                              RequestContext(request))
+#     return render_to_response('common/home.html',
+#                               {'hentais': hentais},
+#                               RequestContext(request))
 
 
-def most_liked(request):
-    start_date = datetime.now() - timedelta(days=30)
-    hentai_list = Hentai.objects.filter(likes__created__gte=start_date)
-    hentai_list = hentai_list.annotate(likes_count=Count('likes'))
-    hentai_list = hentai_list.order_by('-likes_count')
-    paginator = Paginator(hentai_list, 10)
-    page = request.GET.get('page', 1)
-    try:
-        hentais = paginator.page(page)
-    except PageNotAnInteger:
-        hentais = paginator.page(1)
-    except EmptyPage:
-        hentais = paginator.page(paginator.num_pages)
+# def most_liked(request):
+#     start_date = datetime.now() - timedelta(days=30)
+#     hentai_list = Hentai.objects.filter(likes__created__gte=start_date)
+#     hentai_list = hentai_list.annotate(likes_count=Count('likes'))
+#     hentai_list = hentai_list.order_by('-likes_count')
+#     paginator = Paginator(hentai_list, 10)
+#     page = request.GET.get('page', 1)
+#     try:
+#         hentais = paginator.page(page)
+#     except PageNotAnInteger:
+#         hentais = paginator.page(1)
+#     except EmptyPage:
+#         hentais = paginator.page(paginator.num_pages)
 
-    return render_to_response('common/home.html',
-                              {'hentais': hentais},
-                              RequestContext(request))
+#     return render_to_response('common/home.html',
+#                               {'hentais': hentais},
+#                               RequestContext(request))

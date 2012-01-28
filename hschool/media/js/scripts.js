@@ -5,4 +5,6 @@ $(document).ready(function() {
     	'height': '75%',
     	'type': 'iframe'        
     });
+
+    $(".tabs").tabs();
 });

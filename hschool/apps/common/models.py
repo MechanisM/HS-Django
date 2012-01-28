@@ -4,6 +4,7 @@ from django.db import models
 from taggit.managers import TaggableManager
 from taggit.models import GenericTaggedItemBase, TagBase
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
 
 from common.utils import get_thumbnail_path
 
@@ -74,4 +75,6 @@ class Hentai(models.Model):
 
 class Like(models.Model):
     hentai = models.ForeignKey(Hentai, related_name='likes')
+    user = models.ForeignKey(User, related_name='liked_hentais',
+                             blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
