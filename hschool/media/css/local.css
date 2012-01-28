@@ -1,8 +1,8 @@
 .container-fluid .content {
-    margin-left: 240px;
+    margin-left: 220px;
 }
 .container-fluid .content-content {
-    margin-right: 220px;
+    margin-right: 200px;
     padding: 17px 17px 17px 0;
     background: url(/media/images/sidebar-right-bg.png) repeat-y right top;
     min-height: 300px;
@@ -12,12 +12,13 @@
     position: absolute;
     top: 0;
     left: 21px;
-    width: 220px;
+    width: 200px;
     background: #efefef;
 }
 .sidebar.right {
     float: right;
     margin-left: 0;
+    width: 200px;
 }
 
 .topbar {
