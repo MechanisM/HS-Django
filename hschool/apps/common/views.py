@@ -27,9 +27,9 @@ def home(request):
     mostliked_list = mostliked_list.annotate(likes_count=Count('likes'))
     mostliked_list = mostliked_list.order_by('-likes_count')
 
-    new_paginator = Paginator(new_list, 1)
-    featured_paginator = Paginator(featured_list, 1)
-    mostliked_paginator = Paginator(mostliked_list, 1)
+    new_paginator = Paginator(new_list, 10)
+    featured_paginator = Paginator(featured_list, 10)
+    mostliked_paginator = Paginator(mostliked_list, 10)
 
     tab = request.GET.get('tab', 'new')
     page = request.GET.get('page', 1)
