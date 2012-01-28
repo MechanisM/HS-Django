@@ -186,38 +186,3 @@ def like(request, hentai_id):
     response = HttpResponseRedirect(request.GET.get('destination', '/'))
     response.set_cookie("has_liked", True)
     return response
-
-
-# def featured(request):
-#     hentai_list = Hentai.objects.filter(is_featured=True).order_by('-created')
-#     paginator = Paginator(hentai_list, 10)
-#     page = request.GET.get('page', 1)
-#     try:
-#         hentais = paginator.page(page)
-#     except PageNotAnInteger:
-#         hentais = paginator.page(1)
-#     except EmptyPage:
-#         hentais = paginator.page(paginator.num_pages)
-
-#     return render_to_response('common/home.html',
-#                               {'hentais': hentais},
-#                               RequestContext(request))
-
-
-# def most_liked(request):
-#     start_date = datetime.now() - timedelta(days=30)
-#     hentai_list = Hentai.objects.filter(likes__created__gte=start_date)
-#     hentai_list = hentai_list.annotate(likes_count=Count('likes'))
-#     hentai_list = hentai_list.order_by('-likes_count')
-#     paginator = Paginator(hentai_list, 10)
-#     page = request.GET.get('page', 1)
-#     try:
-#         hentais = paginator.page(page)
-#     except PageNotAnInteger:
-#         hentais = paginator.page(1)
-#     except EmptyPage:
-#         hentais = paginator.page(paginator.num_pages)
-
-#     return render_to_response('common/home.html',
-#                               {'hentais': hentais},
-#                               RequestContext(request))
